@@ -10,3 +10,8 @@ export const signupValidate = [
     body('password').isLength({min:6}).withMessage('Minimum 6 characters required'),
     body('confirmPwd').notEmpty().withMessage('confirm password required')
 ]
+
+export const shortUrlValidate = [
+    body('userId').notEmpty().withMessage('userId is required'),
+    body('url').notEmpty().withMessage('url is required')
+]
