@@ -3,7 +3,7 @@ import { comparePassword, hashPassword } from "../utils/bcrypt.js";
 import { createAccessToken } from "../utils/jwt.js";
 
 export const signup = async (req, res, next) => {
-  try {
+  try { 
     const { uname, email, password, confirmPwd } = req.body;
     if (password !== confirmPwd) {
       const error = new Error("Enter Matching Password");
@@ -39,10 +39,6 @@ export const login = async (req, res, next) => {
             error.statusCode = 403
             throw error
         }
-        console.log(user);
-        
-        
-        console.log(user);
         
         const accessToken = await createAccessToken({...user,password:''})
         res.cookie('accessToken',accessToken)

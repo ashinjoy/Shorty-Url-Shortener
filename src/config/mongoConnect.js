@@ -3,9 +3,7 @@ import { secret } from "../constants/constants.js";
 const { MONGO } = secret;
 
 export const dbConnection = async () => {
-  try {
-    console.log('mongo',MONGO);
-    
+  try { 
     await mongoose.connect(MONGO);
     return
   } catch (error) {

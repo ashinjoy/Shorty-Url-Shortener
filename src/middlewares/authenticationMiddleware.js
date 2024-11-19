@@ -20,6 +20,9 @@ export const isUserLogin = async (req, res, next) => {
       error.statusCode = 401;
       throw error;
     }
+    console.log(user);
+    
+    req.userID = user?._id
     next()
   } catch (error) {
     console.error(error);

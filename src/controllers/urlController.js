@@ -3,8 +3,12 @@ import { generateShortId } from "../utils/randomId.js";
 
 export const shortenUrl = async (req, res, next) => {
   try {
-    const { userId, url } = req.body;
-    const shortId = generateShortId(6);
+    const userId = req.userID
+    const { url } = req.body;
+    const shortId = await generateShortId(6);
+    console.log(shortId , typeof shortId);
+    console.log(userId);
+    
     const createUrl = await urlModel.create({
       userId,
       shortUrl: shortId,
@@ -22,3 +26,15 @@ export const shortenUrl = async (req, res, next) => {
     next(error); 
   }
 };
+
+export const redirectToOriginalURL = async(req,res,next)=>{
+    try {
+        const {shortUrl} = req.params
+       const urlData = await urlModel.findOne({shortUrl})
+       const ogUrl = urlData?.originalUrl
+       res.redirect(ogUrl)
+    } catch (error) {
+        console.error(error);
+        next(error)
+    }
+}
