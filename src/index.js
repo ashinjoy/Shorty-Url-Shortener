@@ -12,8 +12,9 @@ app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
+    origin:'https://url-shortener-frontend-beryl.vercel.app',
     credentials:true
-})) 
+}))
 app.use('/',router)
 app.use(errorHandler)
 app.listen(PORT,()=>console.log('Server Connected SuccessFully'))
