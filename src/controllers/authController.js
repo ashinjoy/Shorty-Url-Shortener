@@ -41,7 +41,12 @@ export const login = async (req, res, next) => {
         }
         
         const accessToken = await createAccessToken({...user,password:''})
-        res.cookie('accessToken',accessToken)
+        res.cookie('accessToken',accessToken,{
+          httpOnly: true,
+          sameSite: "None",
+          secure:true
+        })
+    
         res.status(200).json({status:true,message:'login success'})
     } catch (error) {
         console.error(error);
